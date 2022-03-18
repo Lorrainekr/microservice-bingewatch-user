@@ -2,6 +2,7 @@ package com.bingewatch.service.user.microservicebingewatchuser.service.impl;
 
 import com.bingewatch.service.user.microservicebingewatchuser.dao.FavoriRepository;
 import com.bingewatch.service.user.microservicebingewatchuser.dto.FavoriDTO;
+import com.bingewatch.service.user.microservicebingewatchuser.dto.UserDTO;
 import com.bingewatch.service.user.microservicebingewatchuser.entity.Favori;
 import com.bingewatch.service.user.microservicebingewatchuser.service.FavoriService;
 import org.springframework.beans.BeanUtils;
@@ -53,6 +54,7 @@ public class FavoriServiceImpl implements FavoriService {
         System.out.println(favori);
         return favoriDTO;
     }
+
 
     @Override
     public FavoriDTO updateFavori(Integer id, FavoriDTO favoriDTO) {return null;}
