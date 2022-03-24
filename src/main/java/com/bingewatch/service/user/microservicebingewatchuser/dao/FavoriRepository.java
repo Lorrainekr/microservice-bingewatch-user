@@ -1,5 +1,6 @@
 package com.bingewatch.service.user.microservicebingewatchuser.dao;
 
+import com.bingewatch.service.user.microservicebingewatchuser.dto.FavoriDTO;
 import com.bingewatch.service.user.microservicebingewatchuser.entity.Favori;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

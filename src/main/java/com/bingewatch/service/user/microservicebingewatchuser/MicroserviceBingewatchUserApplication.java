@@ -30,9 +30,7 @@ public class MicroserviceBingewatchUserApplication implements CommandLineRunner 
 
     @Override
     public void run(String... args) throws Exception {
-        FavoriDTO favori = new FavoriDTO(1, "Titre de la série", "Synopsis de la série", 1, 1, "France");
-        favori = new FavoriDTO(2, "Game of thrones", "Synopsis avec des dragons", 10, 7, "US");
-        favoriservice.createFavori(favori);
+
 
         System.out.println(favoriservice.getAllFavoris());
 

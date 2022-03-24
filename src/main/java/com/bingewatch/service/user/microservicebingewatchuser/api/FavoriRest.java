@@ -22,6 +22,7 @@ public class FavoriRest {
 
     @PostMapping(path = "/favoris")
     public ResponseEntity<FavoriDTO> createFavori(@RequestBody FavoriDTO favoriDTO) {
+        System.out.println(favoriDTO);
         FavoriDTO newfavoriDto = favoriService.createFavori(favoriDTO);
         return new ResponseEntity<FavoriDTO>(newfavoriDto, HttpStatus.OK);
     }
