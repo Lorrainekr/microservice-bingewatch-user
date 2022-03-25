@@ -58,7 +58,10 @@ public class UserServiceImpl implements UserService {
         System.out.println(user);
         return userDTO;
     }
+    @Override
+    public UserDTO updateUser(UserDTO userDTO, String encodedPassword, String id) {return null;}
 
     @Override
-    public UserDTO updateUser(Integer id, UserDTO userDTO) {return null;}
+    public UserDTO save(UserDTO userDTO) {return null;}
+
 }

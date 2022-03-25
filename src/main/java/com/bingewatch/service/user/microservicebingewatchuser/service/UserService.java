@@ -10,5 +10,8 @@ public interface UserService {
     public void deleteUser(Integer id);
     public UserDTO getUSerByEmail(String email);
     public UserDTO createUser(UserDTO userDTO);
-    public UserDTO updateUser(Integer id, UserDTO userDTO);
+    public UserDTO updateUser(UserDTO userDTO, String encodedPassword, String id);
+
+    public UserDTO save(UserDTO userDTO);
+
 }

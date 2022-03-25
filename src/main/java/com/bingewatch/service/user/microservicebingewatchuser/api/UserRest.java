@@ -1,11 +1,13 @@
 package com.bingewatch.service.user.microservicebingewatchuser.api;
 import com.bingewatch.service.user.microservicebingewatchuser.dto.UserDTO;
+import com.bingewatch.service.user.microservicebingewatchuser.entity.Status;
 import com.bingewatch.service.user.microservicebingewatchuser.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -33,7 +35,46 @@ public class UserRest {
         return null;
     }
 
+    @PostMapping("/users/register")
+    public Status registerUser(@Valid @RequestBody UserDTO newUser) {
+        List<UserDTO> users = userService.getAllUsers();
+        System.out.println("New user: " + newUser.toString());
+        for (UserDTO user : users) {
+            System.out.println("Registered user: " + newUser.toString());
+            if (user.equals(newUser)) {
+                System.out.println("User Already exists!");
+                return Status.USER_ALREADY_EXISTS;
+            }
+        }
+        userService.createUser(newUser);
+        return Status.SUCCESS;
+    }
 
+    @PostMapping("/users/login")
+    public Status loginUser(@Valid @RequestBody UserDTO userDTO) {
+        List<UserDTO> users = userService.getAllUsers();
+        for (UserDTO other : users) {
+            if (other.equals(userDTO)) {
+                userDTO.setLoggedIn(true);
+                userService.save(userDTO);
+                return Status.SUCCESS;
+            }
+        }
+        return Status.FAILURE;
+    }
+
+    @PostMapping("/users/logout")
+    public Status logUserOut(@Valid @RequestBody UserDTO userDTO) {
+        List<UserDTO> users = userService.getAllUsers();
+        for (UserDTO other : users) {
+            if (other.equals(userDTO)) {
+                userDTO.setLoggedIn(false);
+                userService.save(userDTO);
+                return Status.SUCCESS;
+            }
+        }
+        return Status.FAILURE;
+    }
 
 // chercher un user par id
     @GetMapping(path = "/users/{id}")
@@ -49,8 +90,8 @@ public class UserRest {
     }
 // Mettre a jour un user
     @PutMapping(path = "/users/{id}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable Integer id, @RequestBody UserDTO userDTO) {
-        UserDTO newUserDTO = userService.updateUser(id, userDTO);
+    public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDTO, @PathVariable String encodedPassword, @PathVariable String id) {
+        UserDTO newUserDTO = userService.updateUser(userDTO, encodedPassword, id);
 
         return new ResponseEntity<UserDTO>(newUserDTO, HttpStatus.OK);
     }

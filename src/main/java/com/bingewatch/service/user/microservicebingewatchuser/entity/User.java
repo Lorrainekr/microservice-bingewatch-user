@@ -4,10 +4,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import javax.validation.constraints.NotBlank;
+import java.util.*;
 
 @FieldDefaults(level= AccessLevel.PRIVATE)
 @NoArgsConstructor
@@ -15,45 +13,30 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
+@ToString
+@EqualsAndHashCode
 public class User {
-    @javax.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer Id;
+
+    @NotBlank
     private String pseudo;
+
+    @NotBlank
     private String email;
+
     @Column(name = "Encoded_Password", length = 128, nullable = false)
+    @NotBlank
     protected String encodedPassword;
-    private Role role;
 
-    @OneToMany
-    private List<Favori> favoris = new ArrayList<>();
+    @NotBlank
+    private Boolean loggedIn;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "Id=" + Id +
-                ", pseudo='" + pseudo + '\'' +
-                ", email='" + email + '\'' +
-                ", encodedPassword='" + encodedPassword + '\'' +
-                ", role=" + role +
-                ", favoris=" + favoris +
-                '}';
-    }
+    @OneToOne
+    private Role Role;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(Id, user.Id)
-                && Objects.equals(pseudo, user.pseudo)
-                && Objects.equals(email, user.email)
-                && Objects.equals(encodedPassword, user.encodedPassword)
-                && role == user.role && Objects.equals(favoris, user.favoris);
-    }
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Favori> favoris = new HashSet<>();
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(Id, pseudo, email, encodedPassword, role, favoris);
-    }
 }

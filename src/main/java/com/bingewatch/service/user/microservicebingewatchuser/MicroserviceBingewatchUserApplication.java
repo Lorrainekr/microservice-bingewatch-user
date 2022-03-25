@@ -1,10 +1,5 @@
 package com.bingewatch.service.user.microservicebingewatchuser;
 
-import com.bingewatch.service.user.microservicebingewatchuser.dto.FavoriDTO;
-import com.bingewatch.service.user.microservicebingewatchuser.dto.UserDTO;
-import com.bingewatch.service.user.microservicebingewatchuser.entity.Favori;
-import com.bingewatch.service.user.microservicebingewatchuser.entity.Role;
-import com.bingewatch.service.user.microservicebingewatchuser.entity.User;
 import com.bingewatch.service.user.microservicebingewatchuser.service.FavoriService;
 import com.bingewatch.service.user.microservicebingewatchuser.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import java.util.List;
 
 @SpringBootApplication
 public class MicroserviceBingewatchUserApplication implements CommandLineRunner {
@@ -34,8 +27,8 @@ public class MicroserviceBingewatchUserApplication implements CommandLineRunner 
 
         System.out.println(favoriservice.getAllFavoris());
 
-        //UserDTO user = new UserDTO(1, "Low", "lokrinbarg@gmail.com", Role.USER, );
-        //userService.createUser(user);
+       //UserDTO user = new UserDTO(1,"Low","1234","lokrinbarg@gmail.com",true, Status.SUCCESS, new ArrayList<>());
+       //userService.createUser(user);
 
         //System.out.println(userService.getAllUsers());
     }
