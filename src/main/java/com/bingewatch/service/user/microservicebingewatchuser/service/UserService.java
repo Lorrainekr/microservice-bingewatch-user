@@ -8,6 +8,7 @@ public interface UserService {
     public List<UserDTO> getAllUsers();
     public UserDTO getUser(Integer id);
     public void deleteUser(Integer id);
+    public UserDTO getUSerByEmail(String email);
     public UserDTO createUser(UserDTO userDTO);
     public UserDTO updateUser(Integer id, UserDTO userDTO);
 }

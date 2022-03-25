@@ -21,6 +21,7 @@ public class UserDTO {
     private Integer Id;
 
     private String pseudo;
+    private String encodedPassword;
     private String email;
     private Role role;
 
@@ -29,9 +30,10 @@ public class UserDTO {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserDTO{" +
                 "Id=" + Id +
                 ", pseudo='" + pseudo + '\'' +
+                ", encodedPassword='" + encodedPassword + '\'' +
                 ", email='" + email + '\'' +
                 ", role=" + role +
                 ", favoris=" + favoris +
@@ -45,13 +47,13 @@ public class UserDTO {
         UserDTO userDTO = (UserDTO) o;
         return Objects.equals(Id, userDTO.Id)
                 && Objects.equals(pseudo, userDTO.pseudo)
-                && Objects.equals(email, userDTO.email)
-                && role == userDTO.role
+                && Objects.equals(encodedPassword, userDTO.encodedPassword)
+                && Objects.equals(email, userDTO.email) && role == userDTO.role
                 && Objects.equals(favoris, userDTO.favoris);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id, pseudo, email, role, favoris);
+        return Objects.hash(Id, pseudo, encodedPassword, email, role, favoris);
     }
 }

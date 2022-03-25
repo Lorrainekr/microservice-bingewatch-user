@@ -44,6 +44,11 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Integer id) {}
 
     @Override
+    public UserDTO getUSerByEmail(String email) {
+        return null;
+    }
+
+    @Override
     public UserDTO createUser(UserDTO userDTO) {
         User user = new User();
         BeanUtils.copyProperties(userDTO, user);

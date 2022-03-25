@@ -23,6 +23,18 @@ public class UserRest {
         UserDTO newuserDto = userService.createUser(userDTO);
         return new ResponseEntity<UserDTO>(newuserDto, HttpStatus.OK);
     }
+
+// une méthode "connexion (username, pwd) => vérifie si le user existe et si son pwd est celui de la bdd (valide)"
+    @GetMapping(path = "/users/pseudo")
+    public ResponseEntity<UserDTO> connexion(@PathVariable String pseudo, @PathVariable String encodedPassword) {
+        // algo pour cherhcer le user et véifier son mot de passe
+        // si ok -> le user en question
+        // sinon -> erreur 403 (unauthorizecd)
+        return null;
+    }
+
+
+
 // chercher un user par id
     @GetMapping(path = "/users/{id}")
     public ResponseEntity<UserDTO> getUser(@PathVariable Integer id) {

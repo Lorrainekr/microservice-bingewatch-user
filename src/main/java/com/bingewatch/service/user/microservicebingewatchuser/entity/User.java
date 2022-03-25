@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -18,15 +19,14 @@ public class User {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer Id;
-
     private String pseudo;
     private String email;
-    private Byte [] encodedPassword;
-    private String motDePasse;
+    @Column(name = "Encoded_Password", length = 128, nullable = false)
+    protected String encodedPassword;
     private Role role;
 
     @OneToMany
-    private List<Favori> favoris;
+    private List<Favori> favoris = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -34,8 +34,7 @@ public class User {
                 "Id=" + Id +
                 ", pseudo='" + pseudo + '\'' +
                 ", email='" + email + '\'' +
-                ", encodedPassword=" + Arrays.toString(encodedPassword) +
-                ", motDePasse='" + motDePasse + '\'' +
+                ", encodedPassword='" + encodedPassword + '\'' +
                 ", role=" + role +
                 ", favoris=" + favoris +
                 '}';
@@ -49,15 +48,12 @@ public class User {
         return Objects.equals(Id, user.Id)
                 && Objects.equals(pseudo, user.pseudo)
                 && Objects.equals(email, user.email)
-                && Arrays.equals(encodedPassword, user.encodedPassword)
-                && Objects.equals(motDePasse, user.motDePasse)
+                && Objects.equals(encodedPassword, user.encodedPassword)
                 && role == user.role && Objects.equals(favoris, user.favoris);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(Id, pseudo, email, motDePasse, role, favoris);
-        result = 31 * result + Arrays.hashCode(encodedPassword);
-        return result;
+        return Objects.hash(Id, pseudo, email, encodedPassword, role, favoris);
     }
 }
