@@ -26,7 +26,7 @@ public class User {
     @NotBlank
     private String email;
 
-    @Column(name = "Encoded_Password", length = 128, nullable = false)
+    //@Column(name = "Encoded_Password", length = 128, nullable = false)
     @NotBlank
     protected String encodedPassword;
 
