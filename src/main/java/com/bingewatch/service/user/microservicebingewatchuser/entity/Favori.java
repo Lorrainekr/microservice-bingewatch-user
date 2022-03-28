@@ -1,62 +1,52 @@
 package com.bingewatch.service.user.microservicebingewatchuser.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.Hibernate;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
+@Table(name = "favoris")
 @FieldDefaults(level= AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Favori {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "favori_generator")
     private Integer id;
-    private String titre;
-    private String synopsis;
-    //private Byte image;
-    //@JsonFormat(pattern="yyyy")
-    //private Date annee;
-    private Integer nbreEpisode;
-    private Integer nbrSaison;
-    private String pays;
+    private String name;
+    private String overview;
+    private Date first_air_date;
+    private Integer popularity;
+    private String poster_path;
 
-    @Override
-    public String toString() {
-        return "Favori{" +
-                "id=" + id +
-                ", titre='" + titre + '\'' +
-                ", synopsis='" + synopsis + '\'' +
-                ", nbreEpisode=" + nbreEpisode +
-                ", nbrSaison=" + nbrSaison +
-                ", pays='" + pays + '\'' +
-                '}';
-    }
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    @ToString.Exclude
+    private User user;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Favori favori = (Favori) o;
-        return Objects.equals(id, favori.id)
-                && Objects.equals(titre, favori.titre)
-                && Objects.equals(synopsis, favori.synopsis)
-                && Objects.equals(nbreEpisode, favori.nbreEpisode)
-                && Objects.equals(nbrSaison, favori.nbrSaison)
-                && Objects.equals(pays, favori.pays);
+        return id != null && Objects.equals(id, favori.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, titre, synopsis, nbreEpisode, nbrSaison, pays);
+        return getClass().hashCode();
     }
 }
 

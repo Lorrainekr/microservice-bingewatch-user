@@ -14,50 +14,20 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
+@ToString
+@Table(name= "users")
+@EqualsAndHashCode
 public class User {
-    @javax.persistence.Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Id;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
+    private Integer id;
+    @Column(name = "pseudo")
     private String pseudo;
+    @Column(name = "email")
     private String email;
-    private Byte [] encodedPassword;
-    private String motDePasse;
-    private Role role;
+    @Column(name = "password")
+    private String encodedPassword;
 
-    @OneToMany
-    private List<Favori> favoris;
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "Id=" + Id +
-                ", pseudo='" + pseudo + '\'' +
-                ", email='" + email + '\'' +
-                ", encodedPassword=" + Arrays.toString(encodedPassword) +
-                ", motDePasse='" + motDePasse + '\'' +
-                ", role=" + role +
-                ", favoris=" + favoris +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(Id, user.Id)
-                && Objects.equals(pseudo, user.pseudo)
-                && Objects.equals(email, user.email)
-                && Arrays.equals(encodedPassword, user.encodedPassword)
-                && Objects.equals(motDePasse, user.motDePasse)
-                && role == user.role && Objects.equals(favoris, user.favoris);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(Id, pseudo, email, motDePasse, role, favoris);
-        result = 31 * result + Arrays.hashCode(encodedPassword);
-        return result;
+    public User(String pseudo, String email, String encodedPassword) {
     }
 }
