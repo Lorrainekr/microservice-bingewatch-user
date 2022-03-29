@@ -11,8 +11,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode
 public class Favori {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

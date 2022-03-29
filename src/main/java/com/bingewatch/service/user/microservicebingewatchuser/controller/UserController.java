@@ -52,11 +52,9 @@ public class UserController {
     @PutMapping(path="/addfavorite")
     public void addFavorite(@Valid @RequestBody Request request ) throws FavoriFoundException {
         Optional<User> user;
-
-
         try {
-            if (!favoriaddRepository.existsByTitle(request.getName())){
-                user = userService.findByEmailInDB(request.getEmail());
+            if (!favoriaddRepository.existsByName(request.getName())){
+                user = userService.findByNameInDB(request.getUserName());
                 System.out.println(user);
                 System.out.println(request);
 
@@ -96,6 +94,13 @@ public class UserController {
         log.info("searchUserByEmail() est appelée");
         return userService.findByEmailInDB(email);
     }
+
+    @GetMapping(path="/searchUserName/{name}")
+    public Optional<User> searchUserByName(@PathVariable String name) throws UserNotFoundException {
+        log.info("searchUserByEmail() est appelée");
+        return userService.findByNameInDB(name);
+    }
+
     @ApiOperation(value = "Recherche un user grâce à son id à condition que celui-ci existe.")
     @GetMapping(path="/searchUserId/{id}")
     public Optional<User> searchUserById(@PathVariable Long id) throws UserNotFoundException{
@@ -137,16 +142,16 @@ public class UserController {
 
 
     @ApiOperation(value = "Mon espace")
-    @GetMapping(path="/monespace/{email}")
-    public List<Request> monEspace(@PathVariable String email) throws UserNotFoundException {
+    @GetMapping(path="/monespace/{name}")
+    public List<Request> monEspace(@PathVariable String name) throws UserNotFoundException {
         log.info("favoriByEmail() est appelée");
-        Optional<User> user =userService.findByEmailInDB(email);
+        Optional<User> user =userService.findByNameInDB(name);
         System.out.println(user.get().getEmail());
         List<Favorisadd> list = favoriaddRepository.findByUser(user.get());
         List<Request> requestlist = new ArrayList<Request>();
         for (Favorisadd fav : list) {
             Request req= new Request();
-            req.setEmail(email);
+            req.setUserName(name);
             req.setId(fav.getId());
             req.setPoster_path(fav.getPoster_path());
             req.setName(fav.getName());
@@ -159,9 +164,9 @@ public class UserController {
     @PutMapping(path="deletefavorite/")
     public void deletefavorite(@RequestBody Request request) throws UserNotFoundException {
         log.info("deletefavoriByEmail() est appelée");
-        Optional<User> user =userService.findByEmailInDB(request.getEmail());
+        Optional<User> user =userService.findByEmailInDB(request.getUserName());
         System.out.println(user.get().getEmail());
-        Favorisadd fav=favoriaddRepository.findByimdbIDAndUser(request.getId(),user.get());
+        Favorisadd fav=favoriaddRepository.findByIdAndUser(request.getId(),user.get());
         favoriaddRepository.delete(fav);
         System.out.println(user.get().getFavorisadd());
 

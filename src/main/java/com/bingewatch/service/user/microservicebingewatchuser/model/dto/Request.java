@@ -10,7 +10,7 @@ import lombok.ToString;
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Request {
-    private String email;
+    private String userName;
     private Integer id;
     private String name;
     private String overview;

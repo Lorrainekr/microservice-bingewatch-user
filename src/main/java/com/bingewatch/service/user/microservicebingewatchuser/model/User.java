@@ -4,9 +4,11 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.util.*;
 
 @FieldDefaults(level= AccessLevel.PRIVATE)
 @NoArgsConstructor
@@ -16,6 +18,7 @@ import java.util.*;
 @Entity
 @ToString
 @EqualsAndHashCode
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

@@ -9,7 +9,7 @@ import java.util.List;
 public interface FavoriService {
     public List<FavoriDTO> getAllFavoris();
     public FavoriDTO getFavori(Integer id);
-    public FavoriDTO getFavoriByTitle(String title);
+    public FavoriDTO getFavoriByTitle(String name);
     public void deleteFavori(Integer id);
     public FavoriDTO createFavori(FavoriDTO favoriDTO);
     public FavoriDTO updateFavori(Integer id, FavoriDTO favoriDTO);

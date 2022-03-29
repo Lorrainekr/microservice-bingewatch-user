@@ -83,6 +83,14 @@ public class UserService {
         return userSearching;
     }
 
+
+    public Optional<User> findByNameInDB(String name) throws UserNotFoundException{
+        Optional<User> userSearching = userRepository.findByName(name);
+        if(userSearching.isEmpty())
+            throw new UserNotFoundException();
+        return userSearching;
+    }
+
     public Optional<User> findByIdInDB(Long id) throws UserNotFoundException {
         Optional<User> userSearching = userRepository.findById(id);
         if(userSearching.isEmpty())

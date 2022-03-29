@@ -37,7 +37,7 @@ public class FavoriServiceImpl implements FavoriService {
 
     public Boolean Favorinotexist(@Valid Request request) throws FavoriFoundException {
 
-        if(favoriRepository.existsByTitle(request.getEmail())) {
+        if(favoriRepository.existsByName(request.getUserName())) {
             return false;
         }else {
             return true;
@@ -71,7 +71,7 @@ public class FavoriServiceImpl implements FavoriService {
 
     @Override
     public FavoriDTO getFavoriByTitle(String title) {
-        Favorisadd favori = favoriRepository.findByTitle(title).get();
+        Favorisadd favori = favoriRepository.findByName(title).get();
         FavoriDTO favoriDTO = new FavoriDTO();
         BeanUtils.copyProperties(favori, favoriDTO);
         return favoriDTO;
