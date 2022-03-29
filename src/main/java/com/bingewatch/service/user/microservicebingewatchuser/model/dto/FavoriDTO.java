@@ -1,4 +1,4 @@
-package com.bingewatch.service.user.microservicebingewatchuser.dto;
+package com.bingewatch.service.user.microservicebingewatchuser.model.dto;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;

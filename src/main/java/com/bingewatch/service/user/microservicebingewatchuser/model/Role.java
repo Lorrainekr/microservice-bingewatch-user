@@ -1,4 +1,4 @@
-package com.bingewatch.service.user.microservicebingewatchuser.entity;
+package com.bingewatch.service.user.microservicebingewatchuser.model;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -8,11 +8,12 @@ import javax.persistence.*;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
+@Getter
+@Setter
+@ToString(of = {"idRole","typeRole"} )
+@EqualsAndHashCode(of = {"idRole", "typeRole" })
 @Entity
 @Table(name="role")
-
 public class Role {
 
     @Id
@@ -23,5 +24,4 @@ public class Role {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, name="type_role")
     private TypeRole typeRole;
-
 }

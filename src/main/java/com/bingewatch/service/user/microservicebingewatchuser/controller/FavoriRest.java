@@ -1,7 +1,6 @@
-package com.bingewatch.service.user.microservicebingewatchuser.api;
+package com.bingewatch.service.user.microservicebingewatchuser.controller;
 
-import com.bingewatch.service.user.microservicebingewatchuser.dto.FavoriDTO;
-import com.bingewatch.service.user.microservicebingewatchuser.entity.Favori;
+import com.bingewatch.service.user.microservicebingewatchuser.model.dto.FavoriDTO;
 import com.bingewatch.service.user.microservicebingewatchuser.service.FavoriService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

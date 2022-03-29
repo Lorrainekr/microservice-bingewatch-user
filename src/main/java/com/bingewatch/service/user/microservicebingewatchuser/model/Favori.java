@@ -1,10 +1,9 @@
-package com.bingewatch.service.user.microservicebingewatchuser.entity;
+package com.bingewatch.service.user.microservicebingewatchuser.model;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @FieldDefaults(level= AccessLevel.PRIVATE)
@@ -23,10 +22,6 @@ public class Favori {
     private String poster_path;
     private Integer popularity;
     private String first_air_date;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional=false)
-    private User user;
-
 }
 
 
